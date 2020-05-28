@@ -139,6 +139,13 @@ class Process
   # will be closed automatically at the end of the block.
   #
   # Returns the block's value.
+  # ```
+  # someId = "123ABC456DEF"
+  # command = "echo #{someId}"  
+  # output = IO::Memory.new
+  # status = Process.run(command, shell: true, output: output)
+  # p output.to_s
+  # ```
   def self.run(command : String, args = nil, env : Env = nil, clear_env : Bool = false, shell : Bool = false,
                input : Stdio = Redirect::Pipe, output : Stdio = Redirect::Pipe, error : Stdio = Redirect::Pipe, chdir : String? = nil)
     process = new(command, args, env, clear_env, shell, input, output, error, chdir)
